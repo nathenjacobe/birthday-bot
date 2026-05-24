@@ -101,7 +101,7 @@ async def list_birthdays(interaction: discord.Interaction):
     lines = []
     for user_id, bday in sorted(birthdays.items(), key=lambda x: x[1]):
         month, day = bday.split("-")
-        lines.append(f"<@{user_id}> — {day}/{month}")
+        lines.append(f"<@{user_id}>: {day}/{month}")
 
     await interaction.response.send_message("🎂 **birthdays**\n" + "\n".join(lines), ephemeral=True)
 
