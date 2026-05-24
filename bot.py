@@ -30,10 +30,10 @@ async def on_ready():
     print(f"logged in as {client.user}, commands synced.")
     birthday_check.start()
 
-@tasks.loop(minutes=1)
+@tasks.loop(hours=1)
 async def birthday_check():
     now = datetime.now(UK_TZ)
-    if now.hour != 0 or now.minute != 0:
+    if now.hour != 0:
         return
 
     data = load_data()
@@ -112,5 +112,14 @@ async def set_channel(interaction: discord.Interaction, channel: discord.TextCha
     data["channel_id"] = str(channel.id)
     save_data(data)
     await interaction.response.send_message(f"birthday channel set to {channel.mention}", ephemeral=True)
+
+@tree.command(name="debug_data", description="show raw contents of the data json")
+async def debug_data(interaction: discord.Interaction):
+    if not os.path.exists(DATA_PATH):
+        await interaction.response.send_message("data file does not exist yet", ephemeral=True)
+        return
+    with open(DATA_PATH) as f:
+        contents = f.read()
+    await interaction.response.send_message(f"```json\n{contents}\n```", ephemeral=True)
 
 client.run(TOKEN)
