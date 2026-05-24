@@ -51,7 +51,7 @@ async def birthday_check():
             try:
                 member = channel.guild.get_member(int(user_id))
                 name = member.mention if member else f"<@{user_id}>"
-                await channel.send(f"🎂 happy birthday, {name}! ||@everyone||")
+                await channel.send(f"🎂 happy birthday, {name}! @everyone")
             except Exception as e:
                 print(f"error sending birthday message: {e}")
 
@@ -104,14 +104,6 @@ async def list_birthdays(interaction: discord.Interaction):
         lines.append(f"<@{user_id}>: {day}/{month}")
 
     await interaction.response.send_message("🎂 **birthdays**\n" + "\n".join(lines), ephemeral=True)
-
-@tree.command(name="ping_everyone")
-async def ping_everyone(interaction: discord.Interaction):
-    await interaction.response.send_message(
-        "||@everyone||",
-        allowed_mentions=discord.AllowedMentions(everyone=True)
-    ) 
-
 
 @tree.command(name="set_channel", description="set the channel where birthday messages are sent")
 @app_commands.describe(channel="the text channel to use")
