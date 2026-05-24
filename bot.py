@@ -4,8 +4,6 @@ from discord.ext import tasks
 import json, os
 from datetime import datetime
 import zoneinfo
-from dotenv import load_dotenv
-load_dotenv()
 
 TOKEN = os.environ["DISCORD_TOKEN"]
 DATA_PATH = os.environ.get("DATA_PATH", "/data/birthdays.json")
