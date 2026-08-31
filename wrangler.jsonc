@@ -1,0 +1,18 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "birthday-bot",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-08-31",
+
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "birthday-bot",
+			"database_id": "2587de59-5803-4353-9693-ad7179a83af1",
+		},
+	],
+
+	"triggers": {
+		"crons": ["0 * * * *"],
+	},
+}
